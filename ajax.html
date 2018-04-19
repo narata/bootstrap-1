@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <form>
+        a: <input type="text" id="a" name="a"> <br>
+        b: <input type="text" id="b" name="b"> <br>
+        <p>result: <span id='result'></span></p>
+        <button type="button" id='sum'>ajax提交</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $("#sum").click(function () {
+                var a = $("#a").val();
+                var b = $("#b").val();
+                $.ajax({
+                    url: "http://localhost:8000/ajax/add",
+                    type: "GET",
+                    dataType: "jsonp",
+                    data: {'a': a, 'b': b},
+                    success: function (data) {
+                        var result = JSON.stringify(data);
+                        var json = JSON.parse(result);
+                        $("#result").html(json["result"]);
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>
