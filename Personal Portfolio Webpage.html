@@ -1,0 +1,289 @@
+<html>
+<head>
+    <title>Personal Portolio Webpage</title>
+    <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            color:#666;
+            background:#888;
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size:20px;
+        }
+        h2,h3{
+            color:#888;
+            font-weight:bold;
+            text-align:center;
+            text-transform:uppercase;
+        }
+        a{
+            color:#722872;
+        }
+        a:hover,a:focus{
+            color:#592059;
+        }
+        #banner .container,
+        main header,
+        #portfolio .grid,
+        #contact>div,
+        footer #footer-above{
+            display:flex;
+            flex-flow:row wrap;
+            justify-content:space-around;
+            align-items:flex-start;
+            margin:0 auto;
+        }
+        #banner{
+            background-color:#722872 !important;
+            height:80px;
+            box-shadow:0 2px 2px 1px rgba(0, 0, 0, 0.2);
+            border-color:#592059;
+        }
+        #banner .container{
+            /*display: flex;*/
+            width:95%;
+            max-width:1024px;
+            justify-content:space-between;
+            align-items:center;
+        }
+        #banner .container::before, #banner .container::after{
+            display:none
+        }
+        #banner img{
+            height:50px;
+            margin:15px 0;
+        }
+        nav{
+            font-size:13px;
+            background:#722872;
+            transition:all .3s;
+        }
+        @media(max-width:768px){
+            nav{
+                padding:5px;
+                text-align:center;
+                margin:0 auto;
+                width:120%
+            }
+            nav .active a{
+                color:#722872;
+                background:#bbb;
+                box-shadow:0 2px 2px 1px rgba(0, 0, 0, 0.1);
+            }
+        }
+        .nav>li{
+            /*height:100%;*/
+            text-transform:uppercase;
+            font-weight:bold;
+            letter-spacing:2px;
+            display:inline-flex;
+        }
+        .nav>li a{
+            color:#ffffff;
+            padding:10px 20px;
+        }
+        .nav>li a:hover{
+            color:#722872;
+            background:#bbb;
+            box-shadow:0 2px 2px 1px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-toggle{
+            margin-right:0;
+        }
+        main{
+            display: flex;
+            padding-top: 80px;
+            flex-flow:row wrap;
+            justify-content: center;
+            margin:0 auto;
+        }
+        @media (min-width: 1023px){
+            main header {
+                padding: 50px 30px;
+            }
+        }
+        main header{
+            background-color: rgb(170, 170, 170);
+            /*width: 1024px;*/
+            width: 90%;
+            box-shadow: 0 1px 1px 1px;
+            flex-wrap: nowrap;
+            text-align: right;
+        }
+        main header img{
+            border-radius: 50%;
+            width: 250px;
+            max-width: 80%;
+            margin: 30px 0 10px;
+            height: auto;
+        }
+        .intro-text{
+            padding: 50px;
+            color: white;
+        }
+        .start-bright{
+            margin: 40px auto 30px;
+            border-top: solid 5px;
+            max-width: 512px;
+            text-align: right;
+        }
+        main section{
+            background-color: rgb(238, 238, 238);
+            /*width: 1024px;*/
+            width: 90%;
+            box-shadow: 0 1px 1px 1px;
+            padding: 40px 0;
+        }
+        .star-dark{
+            margin: 40px auto 30px;
+            border-top: solid 5px;
+            border-color: rgb(136, 136, 136);
+            max-width: 500px;
+        }
+        .grid li img{
+            width: 400px;
+            height: auto;
+        }
+        li{
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+        #portfolio .grid{
+            list-style: none;
+        }
+        #portfolio .grid li{
+            margin: 20px;
+        }
+        #contactForm{
+            display: flex;
+            width: 45%;
+            flex-wrap: wrap;
+        }
+        .form-item{
+            width: 90%;
+        }
+        .form-item label{
+            display: block;
+            z-index: 0;
+            position: relative;
+            top: 2em;
+            margin: 0;
+            font-size: .85em;
+            vertical-align: baseline;
+            opacity: 0;
+        }
+        .form-item input, .form-item textarea {
+            z-index: 1;
+            position: relative;
+            padding-right: 0;
+            padding-left: 0;
+            border: 0;
+            border-radius: 0;
+            font-size: 1.5em;
+            background: 0 0;
+            box-shadow: none!important;
+            resize: none;
+            width: 100%;
+        }
+        #contactForm div {
+            display: block;
+        }
+        .lalala{
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-default navbar-fixed-top" id="banner">
+    <div class="container">
+        <a class="scrollable" href="#top">
+            <img src="http://qlip.in/images/qlip.png" alt="qlip | UI/UX Design and Development" title="qlip | UI/UX Design and Development"/>
+        </a>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <nav class="collapse navbar-collapse" id="navbar" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="scrollable active" href="#top">About</a></li>
+                <li><a class="scrollable" href="#portfolio">Portfolio</a></li>
+                <li><a class="scrollable" href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <header>
+        <div class="intro-text">
+            <p>Front-End Developer and UX/UI designer, with practical experience in project management, branding strategy, and creative direction;  devoted to functional programming and information architecture.</p>
+            <hr class="start-bright">
+            <span class="skills">Web Developer - User Experience Designer - Graphic Artist</span>
+        </div>
+        <img src="img/avatar.jpg" alt="A picture of Justin looking at San Francisco from across the Golden Gate Bridge.">
+    </header>
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <hr class="star-dark">
+        <ul class="grid">
+            <li>
+                <img src="img/YMCA-Realtor-Donation-3.jpg" alt="1">
+            </li>
+            <li>
+                <img src="img/webcaballero.jpg">
+            </li>
+            <li>
+                <img src="img/webmarqas.jpg" alt="">
+            </li>
+            <li>
+                <img src="img/webbrandaxis.jpg" alt="">
+            </li>
+            <li>
+                <img src="img/panacea1.jpg" alt="">
+            </li>
+            <li>
+                <img src="img/webgatomalo.jpg" alt="">
+            </li>
+        </ul>
+    </section>
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <hr class="star-dark">
+        <div>
+            <form id="contactForm" novalidate="">
+                <div class="form-item">
+                    <label for="“name”">Name</label>
+                    <input id="name" type="text" placeholder="Name" required="">
+                </div>
+                <div class="form-item">
+                    <label for="“email”">Email Address</label>
+                    <input id="email" type="email" placeholder="Email Address" required="">
+                </div>
+                <div class="form-item">
+                    <label for="“phone”">Phone Number</label>
+                    <input id="phone" type="tel" placeholder="Phone Number" required="">
+                </div>
+                <div class="form-item">
+                    <label for="“message”">Message</label>
+                    <textarea id="message" rows="5" placeholder="Message" required=""></textarea>
+                </div><br>
+                <button type="submit">Send</button>
+            </form>
+            <div class="lalala">
+                <p>Want to get in touch with me? Be it to request more info about myself or my experience, to ask for my resume, tips on how to solve your sudoku, random questions about the universe and the meaning of life, or even if only for some nice Fika here in stunning Toronto... just feel free to drop me a line anytime.</p>
+                <p>I promise to reply A.S.A.P.</p>
+                <p>Note: No spam/soliciting pour moi, merci :)</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+</body>
+</html>

@@ -4,8 +4,201 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js/vue.js"></script>
+    <link href="css/vue.css" rel="stylesheet">
 </head>
 <body>
+    <div id="example-2">
+        <button @click="show = !show">Toggle show</button>
+        <transition name="bounce">
+            <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: '#example-2',
+            data: {
+                show: true
+            }
+        })
+    </script>
+    <div id="example-1">
+        <button @click="show = !show">
+            Toggle render
+        </button>
+        <transition name="slide-fade">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: '#example-1',
+            data: {
+                show: true
+            }
+        })
+    </script>
+    <div id="demo">
+        <button @click="show = !show">
+            Toggle
+        </button>
+        <transition name="fade">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                show: true
+            }
+        })
+    </script>
+    <div id="message-event-example" class="demo">
+        <p v-for="msg in messages">{{ msg }}</p>
+        <button-message v-on:message="handleMessage"></button-message>
+    </div>
+    <script>
+        Vue.component('button-message', {
+            template: `<div>
+                <input type="text" v-model="message" />
+                <button v-on:click="handleSendMessage">Send</button>
+            </div>`,
+            data: function () {
+                return {
+                    message: 'test message'
+                }
+            },
+            methods: {
+                handleSendMessage: function () {
+                    this.$emit('message', { message: this.message })
+                }
+            }
+        });
+
+        new Vue({
+            el: '#message-event-example',
+            data: {
+                messages: []
+            },
+            methods: {
+                handleMessage: function (payload) {
+                    this.messages.push(payload.message)
+                }
+            }
+        })
+    </script>
+
+    <div id="counter-event-example">
+        <p>{{ total }}</p>
+        <button-counter @increment="incrementTotal"></button-counter>
+        <button-counter @increment="incrementTotal"></button-counter>
+    </div>
+    <script>
+        Vue.component('button-counter', {
+            template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                incrementCounter: function () {
+                    this.counter += 1;
+                    this.$emit('increment')
+                }
+            },
+        });
+
+        new Vue({
+            el: '#counter-event-example',
+            data: {
+                total: 0
+            },
+            methods: {
+                incrementTotal: function () {
+                    this.total += 1
+                }
+            }
+        });
+    </script>
+
+    <div id="prop-example-2">
+        <input v-model="parentMsg">
+        <br>
+        <child :message="parentMsg"></child>
+    </div>
+    <div id="child">
+        <child message="hello!"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['message'],
+            template: '<span>{{ message }}</span>'
+        });
+
+        new Vue({
+            el: '#prop-example-2',
+            data: {
+                parentMsg: 'Message from parent'
+            }
+        });
+
+        new Vue({
+            el: '#child',
+        });
+    </script>
+
+    <div id="my-row">
+        <table>
+            <my-row></my-row>
+            <my-row></my-row>
+            <!--<tr is="my-row"></tr>-->
+            <!--<tr is="my-row"></tr>-->
+        </table>
+        <script type="text/x-template" id="optioncompTemp">
+            <tr><td>1</td><td>2</td><td>3</td></tr>
+        </script>
+    </div>
+    <script>
+        Vue.component('my-row', {
+            template: '#optioncompTemp'
+        });
+        new Vue({
+            el: '#my-row'
+        });
+    </script>
+
+    <div id="example">
+        <my-component></my-component>
+    </div>
+    <script>
+        Vue.component('my-component', {
+            template: '<div>A custom component !</div>'
+        });
+        new Vue({
+            el: '#example'
+        })
+    </script>
+
+    <div id="app-9">
+        <select v-model="selected">
+            <option :value="{number: 123}">123</option>
+        </select>
+        <p>{{ selected }}</p>
+    </div>
+    <script>
+        let app9 = new Vue({
+            el: '#app-9',
+            data: {
+                selected: ''
+            }
+        });
+    </script>
+
+    <div id="app-8">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+    </div>
     <div id="app">
         {{ message }}
     </div>
@@ -30,7 +223,7 @@
     </div>
     <div id="app-6">
         <p>{{ message }}</p>
-        <input v-model="message">
+        <input v-model="message" placeholder="edit me">
     </div>
     <ol>
         <todo-item></todo-item>
@@ -52,33 +245,39 @@
     </div>
 
     <script>
-        var app = new Vue({
+        let app8 = new Vue({
+            el: '#app-8',
+            data: {
+                message: ''
+            }
+        });
+        let app = new Vue({
             el: '#app',
             computed: {
                 message: function () {
                     return Date.now()
-                },
+                }
             },
             created: function () {
                 console.log('a is: ' + this.a)
             }
         });
 
-        var app2 = new Vue({
+        let app2 = new Vue({
             el: '#app-2',
             data: {
                 message: '页面加载于 ' + new Date().toLocaleString()
             }
         });
 
-        var app3 = new Vue({
+        let app3 = new Vue({
             el: '#app-3',
             data: {
                 seen: false
             }
         });
 
-        var app4 = new Vue({
+        let app4 = new Vue({
             el: '#app-4',
             data: {
                 todos: [
@@ -89,7 +288,7 @@
             }
         });
 
-        var app5 = new Vue({
+        let app5 = new Vue({
             el: '#app-5',
             data: {
                 message: 'hello vue.js'
@@ -101,7 +300,7 @@
             }
         });
 
-        var app6 = new Vue({
+        let app6 = new Vue({
             el: '#app-6',
             data: {
                 message: 'Hello Vue'
@@ -113,17 +312,8 @@
             template: '<li>{{ todo.text }}</li>'
         });
 
-        var app7 = new Vue({
+        let app7 = new Vue({
             el: '#app-7',
             data: {
                 groceryList: [
-                    { id: 0, text: '蔬菜' },
-                    { id: 1, text: '奶酪' },
-                    { id: 2, text: '随便其它什么人吃的东西' }
-                ]
-            }
-        });
-    </script>
-
-</body>
-</html>
+    
